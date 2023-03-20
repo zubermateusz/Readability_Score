@@ -89,7 +89,7 @@ public class Main {
         } else if (tempScore == 14) {
             outputYears = "" + (tempScore + 4) + "-" + (tempScore + 8);
         }
-        System.out.println("" + tempScore + " (about " + outputYears+ "-year-olds).");
+        return("" + tempScore + " (about " + outputYears+ "-year-olds).");
     }
 
 }
