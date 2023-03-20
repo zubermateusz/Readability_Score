@@ -44,25 +44,26 @@ public class Main {
         switch (scanner.nextLine()) {
             case "ARI" -> {
                 System.out.println();
-                System.out.format("The score is: %.2f%n", ARI(characters, words.size(), sentences.size()));
+                System.out.println(printScore(ARI(characters, words.size(), sentences.size())));
             }
             case "FK" -> {
                 System.out.println();
+                System.out.println(printScore(FK(characters, words.size(), sentences.size())));
             }
             case "SMOG" -> {
                 System.out.println();
+                System.out.println(printScore(SMOG(characters, words.size(), sentences.size())));
             }
             case "CL" -> {
                 System.out.println();
+                System.out.println(printScore(CL(characters, words.size(), sentences.size())));
             }
             case "all" -> {
                 System.out.println();
+                // past every method
             }
         }
-        /*
-        //String output = sum / wordCounter.length > 10 ? "HARD" : "EASY";
-        //System.out.println(output);
-         */
+
     }
 
 
@@ -84,12 +85,7 @@ public class Main {
     static String printScore(double score) {
         String outputYears = "";
         int tempScore = Math.round((float)score);
-        if (tempScore <= 13) {
-            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 5);
-        } else if (tempScore == 14) {
-            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 8);
-        }
-        return("" + tempScore + " (about " + outputYears+ "-year-olds).");
+        return("" + tempScore + " (about " + (tempScore + 6 )+ "-year-olds).");
     }
 
 }
