@@ -29,14 +29,7 @@ public class Main {
         System.out.println("Sentences: " + sentences.size());
         System.out.println("Characters: " + characters);
 
-        String outputYears = "";
-        int tempScore = (int) Math.ceil(score);
-        if (tempScore <= 13) {
-            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 5);
-        } else if (tempScore == 14) {
-            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 8);
-        }
-        System.out.println("This text should be understood by " + outputYears+ " year-olds.");
+
 
 
 
@@ -86,6 +79,17 @@ public class Main {
     }
     static double CL(int NumberOfCharacters, int numberOfWords, int numberOfSentences) {
         return (4.71 * ((double)NumberOfCharacters/ numberOfWords) + 0.5 * (double)numberOfWords/ numberOfSentences - 21.43);
+    }
+
+    static String printScore(double score) {
+        String outputYears = "";
+        int tempScore = Math.round((float)score);
+        if (tempScore <= 13) {
+            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 5);
+        } else if (tempScore == 14) {
+            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 8);
+        }
+        System.out.println("" + tempScore + " (about " + outputYears+ "-year-olds).");
     }
 
 }
