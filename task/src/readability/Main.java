@@ -35,9 +35,9 @@ public class Main {
         String outputYears = "";
         int tempScore = (int) Math.ceil(score);
         if (tempScore <= 13) {
-            outputYears = "" + tempScore + 4 + "-" + tempScore + 5;
+            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 5);
         } else if (tempScore == 14) {
-            outputYears = "" + tempScore + 4 + "-" + tempScore + 8;
+            outputYears = "" + (tempScore + 4) + "-" + (tempScore + 8);
         }
 
 
