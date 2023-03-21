@@ -2,6 +2,8 @@ package readability;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,8 +38,8 @@ public class Main {
         // count syllable (a, e, i, o, u, y - vowels)
         int syllable = 0;
         int polysyllable = 0;
-        for (int i = 0; i < words.size(); i++) { //[cat] [rat] [mat]
-            int[] tab = countSyllables(words.get(i));
+        for (String word : words) { //[cat] [rat] [mat]
+            int[] tab = countSyllables(word);
             syllable += tab[0];
             polysyllable += tab[1];
         }
@@ -89,7 +91,7 @@ public class Main {
         int[] tab = new int[2];
         // return at least 1
         tab[0] = Math.max(syllables, 1);  //number of syllables
-        tab[1] += syllables >= 2 ? 1 : 0; //number of polysyllables
+        tab[1] += syllables > 2 ? 1 : 0; //number of polysyllables
         return tab;
     }
 
@@ -108,9 +110,8 @@ public class Main {
     }
 
     static String printScore(double score) {
-        String outputYears = "";
-        double tempScore = score;
-        return("" + tempScore + " (about " + (tempScore + 6 )+ "-year-olds).");
+        BigDecimal tempScore = BigDecimal.valueOf(score);
+        return("" + tempScore.setScale(2, RoundingMode.HALF_UP) + " (about " + (tempScore.setScale(0, RoundingMode.HALF_UP).add(BigDecimal.valueOf(6)) )+ "-year-olds).");
     }
 
 }
