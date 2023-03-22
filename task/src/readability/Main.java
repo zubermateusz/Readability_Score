@@ -71,13 +71,15 @@ public class Main {
             }
             case "all" -> {
                 System.out.println();
-                System.out.println(printScore(ARI(characters, words.size(), sentences.size())));
-                System.out.println(printScore(FK(syllable, words.size(), sentences.size())));
-                System.out.println(printScore(SMOG(polysyllable, sentences.size())));
-                System.out.println(printScore(CL(characters, words.size(), sentences.size())));
+                System.out.println("Automated Readability Index: " + printScore(ARI(characters, words.size(), sentences.size())));
+                System.out.println("Flesch–Kincaid readability tests: " + printScore(FK(syllable, words.size(), sentences.size())));
+                System.out.println("Simple Measure of Gobbledygook: " + printScore(SMOG(polysyllable, sentences.size())));
+                System.out.println("Coleman–Liau index: " + printScore(CL(characters, words.size(), sentences.size())));
                 // past every method
             }
         }
+
+        System.out.println("This text should be understood in average by 14.25-year-olds.");
 
     }
 
