@@ -14,16 +14,16 @@ public class Main {
         //. ! ?
         // average > 10 HARD
         // average <= 10 EASY
-        Scanner scanner = new Scanner(new File(args[0]));
+            //Scanner scanner = new Scanner(new File(args[0]));
         StringBuilder text = new StringBuilder();
-
+/*
         while (scanner.hasNext()) {
             text.append(scanner.nextLine());
         }
         scanner.close();
-
-        //text.append("This is the front page of the Simple English Wikipedia. Wikipedias are places where people work together to write encyclopedias in different languages. We use Simple English words and grammar here. The Simple English Wikipedia is for everyone! That includes children and adults who are learning English. There are 142,262 articles on the Simple English Wikipedia. All of the pages are free to use. They have all been published under both the Creative Commons License and the GNU Free Documentation License. You can help here! You may change these pages and make new pages. Read the help pages and other good pages to learn how to write pages here. If you need help, you may ask questions at Simple talk. Use Basic English vocabulary and shorter sentences. This allows people to understand normally complex terms or phrases.");
-
+*/
+        text.append("This is the front page of the Simple English Wikipedia. Wikipedias are places where people work together to write encyclopedias in different languages. We use Simple English words and grammar here. The Simple English Wikipedia is for everyone! That includes children and adults who are learning English. There are 142,262 articles on the Simple English Wikipedia. All of the pages are free to use. They have all been published under both the Creative Commons License and the GNU Free Documentation License. You can help here! You may change these pages and make new pages. Read the help pages and other good pages to learn how to write pages here. If you need help, you may ask questions at Simple talk. Use Basic English vocabulary and shorter sentences. This allows people to understand normally complex terms or phrases.");
+        //text.append("Existing computer programs that measure readability are based largely upon subroutines which estimate number of syllables, usually by counting vowels. The shortcoming in estimating syllables is that it necessitates keypunching the prose into the computer. There is no need to estimate syllables since word length in letters is a better predictor of readability than word length in syllables. Therefore, a new readability formula was computed that has for its predictors letters per 100 words and sentences per 100 words. Both predictors can be counted by an optical scanning device, and thus the formula makes it economically feasible for an organization such as the U.S. Office of Education to calibrate the readability of all textbooks for the public school system.");
         System.out.println("The text is:");
         System.out.println(text);
 
@@ -71,15 +71,25 @@ public class Main {
             }
             case "all" -> {
                 System.out.println();
-                System.out.println("Automated Readability Index: " + printScore(ARI(characters, words.size(), sentences.size())));
-                System.out.println("Flesch–Kincaid readability tests: " + printScore(FK(syllable, words.size(), sentences.size())));
-                System.out.println("Simple Measure of Gobbledygook: " + printScore(SMOG(polysyllable, sentences.size())));
-                System.out.println("Coleman–Liau index: " + printScore(CL(characters, words.size(), sentences.size())));
+                double ari = ARI(characters, words.size(), sentences.size());
+                double fk =FK(syllable, words.size(), sentences.size());
+                double smog = SMOG(polysyllable, sentences.size());
+                double cl = CL(characters, words.size(), sentences.size());
+                System.out.println("Automated Readability Index: " + printScore(ari));
+                System.out.println("Flesch–Kincaid readability tests: " + printScore(fk));
+                System.out.println("Simple Measure of Gobbledygook: " + printScore(smog));
+                System.out.println("Coleman–Liau index: " + printScore(cl));
                 // past every method
+                System.out.println("This text should be understood in average by " +
+                        (BigDecimal.valueOf(ari).setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(6))
+                                .add(BigDecimal.valueOf(fk).setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(6))
+                                        .add(BigDecimal.valueOf(smog).setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(6))
+                                                .add(BigDecimal.valueOf(cl).setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(6))))) ).divide(BigDecimal.valueOf(4), 2, RoundingMode.HALF_UP)+
+                                "-year-olds.");
             }
         }
 
-        System.out.println("This text should be understood in average by 14.25-year-olds.");
+
 
     }
 
@@ -108,7 +118,9 @@ public class Main {
         return (1.043 * Math.sqrt((double)polysyllables * 30 / numberOfSentences) + 3.1291);
     }
     static double CL(int numberOfCharacters, int numberOfWords, int numberOfSentences) {
-        return (0.0588 * (double)numberOfCharacters/numberOfWords * 100 - 0.296 * (double)numberOfSentences / numberOfWords - 15.8);
+        double l = (double)numberOfCharacters/numberOfWords * 100;
+        double s = (double)numberOfSentences / numberOfWords * 100;
+        return 0.0588 * l - 0.296 * s - 15.8;
     }
 
     static String printScore(double score) {
