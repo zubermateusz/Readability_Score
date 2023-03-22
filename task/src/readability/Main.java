@@ -14,15 +14,15 @@ public class Main {
         //. ! ?
         // average > 10 HARD
         // average <= 10 EASY
-            //Scanner scanner = new Scanner(new File(args[0]));
+        Scanner scanner = new Scanner(new File(args[0]));
         StringBuilder text = new StringBuilder();
-        /*
+
         while (scanner.hasNext()) {
             text.append(scanner.nextLine());
         }
         scanner.close();
-        */
-        text.append("This is the front page of the Simple English Wikipedia. Wikipedias are places where people work together to write encyclopedias in different languages. We use Simple English words and grammar here. The Simple English Wikipedia is for everyone! That includes children and adults who are learning English. There are 142,262 articles on the Simple English Wikipedia. All of the pages are free to use. They have all been published under both the Creative Commons License and the GNU Free Documentation License. You can help here! You may change these pages and make new pages. Read the help pages and other good pages to learn how to write pages here. If you need help, you may ask questions at Simple talk. Use Basic English vocabulary and shorter sentences. This allows people to understand normally complex terms or phrases.");
+
+        //text.append("This is the front page of the Simple English Wikipedia. Wikipedias are places where people work together to write encyclopedias in different languages. We use Simple English words and grammar here. The Simple English Wikipedia is for everyone! That includes children and adults who are learning English. There are 142,262 articles on the Simple English Wikipedia. All of the pages are free to use. They have all been published under both the Creative Commons License and the GNU Free Documentation License. You can help here! You may change these pages and make new pages. Read the help pages and other good pages to learn how to write pages here. If you need help, you may ask questions at Simple talk. Use Basic English vocabulary and shorter sentences. This allows people to understand normally complex terms or phrases.");
 
         System.out.println("The text is:");
         System.out.println(text);
@@ -55,19 +55,19 @@ public class Main {
         switch (scanner2.nextLine()) {
             case "ARI" -> {
                 System.out.println();
-                System.out.println(printScore(ARI(characters, words.size(), sentences.size())));
+                System.out.println("Automated Readability Index: " + printScore(ARI(characters, words.size(), sentences.size())));
             }
             case "FK" -> {
                 System.out.println();
-                System.out.println(printScore(FK(syllable, words.size(), sentences.size())));
+                System.out.println("Flesch–Kincaid readability tests: " + printScore(FK(syllable, words.size(), sentences.size())));
             }
             case "SMOG" -> {
                 System.out.println();
-                System.out.println(printScore(SMOG(polysyllable, sentences.size())));
+                System.out.println("Simple Measure of Gobbledygook: " + printScore(SMOG(polysyllable, sentences.size())));
             }
             case "CL" -> {
                 System.out.println();
-                System.out.println(printScore(CL(characters, words.size(), sentences.size())));
+                System.out.println("Coleman–Liau index: " + printScore(CL(characters, words.size(), sentences.size())));
             }
             case "all" -> {
                 System.out.println();
