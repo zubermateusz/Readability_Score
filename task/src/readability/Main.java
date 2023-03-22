@@ -11,9 +11,6 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-        //. ! ?
-        // average > 10 HARD
-        // average <= 10 EASY
         Scanner scanner = new Scanner(new File(args[0]));
         StringBuilder text = new StringBuilder();
 
@@ -37,8 +34,8 @@ public class Main {
 
         // count syllable (a, e, i, o, u, y - vowels)
         int syllable = 0;
-        int polysyllable = 1;
-        for (String word : words) { //[cat] [rat] [mat]
+        int polysyllable = 1; // ------------------------------------------   here is + 1
+        for (String word : words) {
             int[] tab = countSyllables(word);
             syllable += tab[0];
             polysyllable += tab[1];
@@ -87,9 +84,6 @@ public class Main {
                                 "-year-olds.");
             }
         }
-
-
-
     }
 
     static int[] countSyllables(String word) {
@@ -101,7 +95,7 @@ public class Main {
         }
         int[] tab = new int[2];
         // return at least 1
-        tab[0] = Math.max(syllables, 1);  //number of syllables
+        tab[0] = Math.max(syllables, 1); //number of syllables
         tab[1] += syllables > 2 ? 1 : 0; //number of polysyllables
         return tab;
     }
